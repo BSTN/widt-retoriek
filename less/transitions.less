@@ -1,0 +1,73 @@
+@import './ease.less';
+@speed: 0.2s;
+
+.popin-enter-active,
+.popin-leave-active {
+  transition-duration: @speed;
+  transition-property: opacity;
+  transition-timing-function: @easeOutExpo;
+  .frame {
+    transition-duration: @speed;
+    transition-property: transform;
+    transition-timing-function: @easeOutExpo;
+  }
+  .bg {
+    transition-duration: @speed * 3;
+    transition-property: opacity;
+    transition-timing-function: @easeOutExpo;
+  }
+}
+
+.popin-enter-from,
+.popin-leave-to {
+  opacity: 0;
+  .frame {
+    // transform: scale(0.9);
+  }
+  .bg {
+    opacity: 0;
+  }
+}
+
+.slidedown-enter-active,
+.slidedown-leave-active {
+  transition-duration: 0.25s;
+  transition-property: transform;
+  transition-timing-function: @easeOutExpo;
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.slidedown-enter-from,
+.slidedown-leave-to {
+  opacity: 0;
+  transform: translateY(-2em);
+}
+
+
+.fadein-enter-active,
+.fadein-leave-active {
+  transition-duration: 1.3s;
+  transition-property: transform;
+  transition-timing-function: @easeInOutExpo;
+  transform: translateY(0);
+  opacity: 1;
+}
+
+.fadein-enter-from,
+.fadein-leave-to {
+  opacity: 0;
+  transform: translateY(0em);
+}
+
+// fade
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.25s ease;
+}
+
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}

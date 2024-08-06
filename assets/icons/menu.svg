@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="200px" height="200px" viewBox="0 0 200 200" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>menu</title>
+    <g id="menu" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <rect id="Rectangle" fill="#000000" x="0" y="18.6357616" width="200" height="30.615894" rx="12"></rect>
+        <rect id="Rectangle-Copy" fill="#000000" x="0" y="85.192053" width="200" height="30.615894" rx="12"></rect>
+        <rect id="Rectangle-Copy-2" fill="#000000" x="0" y="151.748344" width="200" height="30.615894" rx="12"></rect>
+    </g>
+</svg>
