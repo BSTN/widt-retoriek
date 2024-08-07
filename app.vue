@@ -9,6 +9,10 @@
 </template>
 <script lang="ts" setup>
 const config = useRuntimeConfig()
+const store = useMainStore()
+onMounted(() => {
+  store.reset()
+})
 </script>
 <style lang="less">
 @import '@/less/elements.less';

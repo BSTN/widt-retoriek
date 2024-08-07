@@ -21,6 +21,8 @@ if (process.env.local) {
   }
 }
 
+// start config
+
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   content: {
@@ -31,13 +33,17 @@ export default defineNuxtConfig({
    public: {
      API: process.env.API,
    }
- },
+  },
+  
+  image: {
+    domains: ['raw.githubusercontent.com']
+  },
 
   vite: {
     css: {
       preprocessorOptions: {
         less: {
-          additionalData: `@import "@/less/ease.less";@import "@/less/animations.less";`
+          additionalData: `@import "@/less/ease.less";@import "@/less/animations.less"; @import "@/less/global.less";`
         }
       }
     },
@@ -48,5 +54,5 @@ export default defineNuxtConfig({
     ]
   },
 
-  modules: ["@nuxt/content"]
+  modules: ["@nuxt/content", "@nuxt/image", '@pinia/nuxt']
 })
