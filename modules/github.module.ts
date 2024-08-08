@@ -8,10 +8,6 @@ dotenv.config();
 
 async function getRepo({ owner, repo, local }: { owner: string, repo: string, local: string }) {
 
-  console.log(process.env.github_token)
-  console.log(process.env.GITHUBTOKEN)
-  console.log(process.env.GITHUB_TOKEN)
-  
   // do nothing if local folder is used
   if (local && process.env.local) {
     console.log(`Using local github folder: ${local}`)
@@ -25,6 +21,7 @@ async function getRepo({ owner, repo, local }: { owner: string, repo: string, lo
   const octokit = new Octokit({ auth: githubtoken })
 
   // check if update is needed
+  console.log('----- check if update is needed -----')
   const info = await octokit.rest.repos.getCommit({ owner, repo });
 
   if (fs.existsSync(infoPath)) {
