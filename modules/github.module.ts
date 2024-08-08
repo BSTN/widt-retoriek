@@ -8,8 +8,6 @@ dotenv.config();
 
 async function getRepo({ owner, repo, local }: { owner: string, repo: string, local: string }) {
 
-  console.log(process.env)
-
   // do nothing if local folder is used
   if (local && process.env.local) {
     console.log(`Using local github folder: ${local}`)

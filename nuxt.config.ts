@@ -4,8 +4,6 @@ import ViteMarkdown from 'vite-plugin-markdown';
 import svgLoader from 'vite-svg-loader'
 import { resolve } from 'path'
 
-console.log('CONFIG', process.env)
-
 const localRepository = resolve(__dirname, '../widt-retoriek-content')
 
 export default defineNuxtConfig({
@@ -14,7 +12,7 @@ export default defineNuxtConfig({
     sources: {
       content: {
         driver: 'fs',
-        base: process.env.local ? localRepository : resolve(__dirname, 'repos/BSTN-widt-retoriek-content')
+        base: process.env.local ? localRepository : './repos/BSTN-widt-retoriek-content'
       }
     }
   },
