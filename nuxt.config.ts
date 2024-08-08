@@ -4,39 +4,26 @@ import ViteMarkdown from 'vite-plugin-markdown';
 import svgLoader from 'vite-svg-loader'
 import { resolve } from 'path'
 
-let contentConfiguration = {
-  github: {
-        prefix: "/",
-        driver: 'github',
-        repo: 'BSTN/widt-retoriek-content',
-        branch: 'main',
-      }
-}
-if (process.env.local) {
-  contentConfiguration = {
-    content: {
-        driver: 'fs',
-        base: resolve(__dirname,  '../widt-retoriek-content')
-      }
-  }
-}
-
-// start config
+const localRepository = resolve(__dirname, '../widt-retoriek-content')
 
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
   content: {
-    sources: contentConfiguration
+    sources: {
+      content: {
+        driver: 'fs',
+        base: process.env.local ? localRepository : resolve(__dirname, 'repos/BSTN-widt-retoriek-content')
+      }
+    }
+  },
+  image: {
+    dir: process.env.local ? localRepository : 'repos/BSTN-widt-retoriek-content',
   },
 
   runtimeConfig: {
    public: {
      API: process.env.API,
    }
-  },
-  
-  image: {
-    domains: ['raw.githubusercontent.com']
   },
 
   vite: {
@@ -54,5 +41,11 @@ export default defineNuxtConfig({
     ]
   },
 
-  modules: ["@nuxt/content", "@nuxt/image", '@pinia/nuxt']
+  github: [{
+    owner: 'BSTN',
+    repo: 'widt-retoriek-content',
+    local: localRepository
+  }],
+
+  modules: ["@nuxt/content", "@nuxt/image", '@pinia/nuxt', './modules/github.module']
 })
