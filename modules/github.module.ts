@@ -1,10 +1,12 @@
 import { defineNuxtModule } from '@nuxt/kit'
 import { Octokit } from 'octokit'
 import { pipeline } from "node:stream/promises";
-import fs from "node:fs";
+import fs from "fs";
 import * as tar from 'tar'
 import dotenv from 'dotenv';
 dotenv.config();
+
+console.log(`Using local github folder: ${process.env.githubtoken}`)
 
 async function getRepo({ owner, repo, local }: { owner: string, repo: string, local: string }) {
 
