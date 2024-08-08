@@ -84,7 +84,7 @@ export default defineNuxtModule({
     // Usually the npm package name of your module
     name: 'github module',
     // The key in `nuxt.config` that holds your module options
-    configKey: 'github',
+    configKey: 'githubOptions',
     // Compatibility constraints
     compatibility: {
       // Semver version of supported nuxt versions
@@ -101,15 +101,15 @@ export default defineNuxtModule({
   setup(moduleOptions, nuxt) {
     // ...
     nuxt.hook('build:before', async () => {
-      console.log('#### try build hook...', nuxt.options.github)
+      console.log('#### try build hook...', nuxt.options.githubOptions)
       // check if github options are defined
-      if (!('github' in nuxt.options) || !nuxt.options.github || !Array.isArray(nuxt.options.github)) return
+      if (!('githubOptions' in nuxt.options) || !nuxt.options.githubOptions || !Array.isArray(nuxt.options.githubOptions)) return
       // check if .env githubtoken exists
       console.log('#### check token...', process.env.githubtoken)
       if (!process.env.githubtoken) return
       // loop through repositories
-      for (let i in nuxt.options.github) {
-        await getRepo(nuxt.options.github[i])
+      for (let i in nuxt.options.githubOptions) {
+        await getRepo(nuxt.options.githubOptions[i])
       }
     })
   }

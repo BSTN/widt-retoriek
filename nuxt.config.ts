@@ -41,7 +41,7 @@ export default defineNuxtConfig({
     ]
   },
 
-  github: [{
+  githubOptions: [{
     owner: 'BSTN',
     repo: 'widt-retoriek-content',
     local: localRepository
