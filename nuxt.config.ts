@@ -7,7 +7,7 @@ import { resolve } from 'path'
 const localRepository = resolve(__dirname, '../widt-retoriek-content')
 
 export default defineNuxtConfig({
-  compatibilityDate: '2024-04-03',
+  // compatibilityDate: '2024-04-03',
   content: {
     sources: {
       content: {
