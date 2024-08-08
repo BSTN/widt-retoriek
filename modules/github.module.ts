@@ -14,7 +14,7 @@ async function getRepo({ owner, repo, local }: { owner: string, repo: string, lo
     return
   }
   
-  const githubtoken = process.env.githubtoken;
+  const githubtoken = process.env.githubtoken || process.env.GITHUBTOKEN;
   const rootdir = `./repos`
   const dir = `${rootdir}/${owner}-${repo}`
   const infoPath = `${dir}/.info`
