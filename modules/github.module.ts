@@ -7,6 +7,10 @@ import dotenv from 'dotenv';
 dotenv.config();
 
 async function getRepo({ owner, repo, local }: { owner: string, repo: string, local: string }) {
+
+  console.log(process.env.github_token)
+  console.log(process.env.GITHUBTOKEN)
+  console.log(process.env.GITHUB_TOKEN)
   
   // do nothing if local folder is used
   if (local && process.env.local) {
