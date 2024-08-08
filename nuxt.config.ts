@@ -41,11 +41,9 @@ export default defineNuxtConfig({
     ]
   },
 
-  githuboptions: [{
+  modules: ["@nuxt/content", "@nuxt/image", '@pinia/nuxt', ['./modules/github.module', {repositories:[{
     owner: 'BSTN',
     repo: 'widt-retoriek-content',
     local: localRepository
-  }],
-
-  modules: ["@nuxt/content", "@nuxt/image", '@pinia/nuxt', './modules/github.module']
+  }]}]]
 })
