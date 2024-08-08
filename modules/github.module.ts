@@ -102,6 +102,7 @@ export default defineNuxtModule({
     // ...
     nuxt.hook('build:before', async () => {
       // check if github options are defined
+      console.log(moduleOptions)
       // if (!('githuboptions' in nuxt.options) || !nuxt.options.githuboptions || !Array.isArray(nuxt.options.githuboptions)) return
       if (!('repositories' in moduleOptions) || !Array.isArray(moduleOptions.repositories)) { return }
       // check if .env githubtoken exists
