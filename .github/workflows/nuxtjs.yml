@@ -73,7 +73,7 @@ jobs:
       - name: Static HTML export with Nuxt
         run: ${{ steps.detect-package-manager.outputs.manager }} run generate
         env: 
-          githubtoken: ${{ secrets.GITHUBTOKEN }}
+          githubtoken: ${{ secrets.GITHUB_TOKEN }}
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
