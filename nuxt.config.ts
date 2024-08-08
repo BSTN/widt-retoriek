@@ -4,6 +4,8 @@ import ViteMarkdown from 'vite-plugin-markdown';
 import svgLoader from 'vite-svg-loader'
 import { resolve } from 'path'
 
+console.log('CONFIG', process.env)
+
 const localRepository = resolve(__dirname, '../widt-retoriek-content')
 
 export default defineNuxtConfig({
