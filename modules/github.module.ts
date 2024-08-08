@@ -6,8 +6,6 @@ import * as tar from 'tar'
 import dotenv from 'dotenv';
 dotenv.config();
 
-console.log(`Using local github folder: ${process.env.githubtoken}`)
-
 async function getRepo({ owner, repo, local }: { owner: string, repo: string, local: string }) {
 
   // do nothing if local folder is used
@@ -16,7 +14,9 @@ async function getRepo({ owner, repo, local }: { owner: string, repo: string, lo
     return
   }
   
-  const githubtoken = process.env.githubtoken || process.env.GITHUBTOKEN;
+  console.log('get Repo?')
+
+  const githubtoken = process.env.githubtoken;
   const rootdir = `./repos`
   const dir = `${rootdir}/${owner}-${repo}`
   const infoPath = `${dir}/.info`
@@ -101,6 +101,7 @@ export default defineNuxtModule({
   setup(moduleOptions, nuxt) {
     // ...
     nuxt.hook('build:before', async () => {
+      console.log('#### try build hook...')
       // check if github options are defined
       if (!('github' in nuxt.options) || !nuxt.options.github || !Array.isArray(nuxt.options.github)) return
       // check if .env githubtoken exists
