@@ -1,6 +1,8 @@
 <template>
   <div class="afsluiten">
-    <button class="afsluiten" @click="afsluiten()">Afsluiten</button>
+    <button class="afsluiten" @click="afsluiten()">
+      <slot></slot>
+    </button>
   </div>
 </template>
 
@@ -8,6 +10,7 @@
 const router = useRouter()
 const store = useMainStore()
 async function afsluiten() {
+
   store.finish().then(() => {
     router.push('/')
   }).catch(err => {
@@ -22,6 +25,11 @@ async function afsluiten() {
 
   button {
     .button();
+
+    :deep(p) {
+      margin: 0;
+      width: auto;
+    }
   }
 }
 </style>

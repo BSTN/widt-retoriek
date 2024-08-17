@@ -1,17 +1,24 @@
 import { defineStore } from 'pinia'
 import { nanoid } from 'nanoid'
+import info from '@/repos/BSTN-widt-retoriek-content/.info.json'
 
 export const useMainStore = defineStore({
   id: 'myMainStore',
   state: () => ({ 
-    version: 0, // 0,1,2,3,4,5,6,7
     userid: '',
-    answers: {}
+    answers: {
+      _version: info.hash
+    }
   }),
   actions: {
+    init() {
+      this.answers._version = info.hash
+    },
     reset() {
-      this.version = Math.floor(Math.random() * 4)
       this.userid = nanoid()
+      this.answers = {
+        _version: info.hash
+      }
     },
     save(reference: string, value: any) {
       this.answers[reference] = value
@@ -22,7 +29,22 @@ export const useMainStore = defineStore({
       else { this.answers[reference].push(value) }
     },
     async finish() {
-      return true
+       const runtimeConfig = useRuntimeConfig()
+        const API = runtimeConfig.public.API
+
+        await fetch(API + '/save', {
+          method: 'POST',
+          headers: {
+            'Accept': 'application/json',
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({ userid: this.userid, answers: this.answers })
+        })
+
+        this.reset()
     }
+  },
+  persist: {
+    storage: persistedState.localStorage,
   }
 })

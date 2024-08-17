@@ -8,10 +8,12 @@
   </div>
 </template>
 <script lang="ts" setup>
-const config = useRuntimeConfig()
+import info from '@/repos/BSTN-widt-retoriek-content/.info.json'
+console.log(info)
 const store = useMainStore()
-onMounted(() => {
-  store.reset()
+
+onMounted(async () => {
+  await store.init()
 })
 </script>
 <style lang="less">

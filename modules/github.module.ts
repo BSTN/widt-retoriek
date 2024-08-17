@@ -19,7 +19,7 @@ async function getRepo({ owner, repo, local }: { owner: string, repo: string, lo
   const githubtoken = process.env.githubtoken;
   const rootdir = `./repos`
   const dir = `${rootdir}/${owner}-${repo}`
-  const infoPath = `${dir}/.info`
+  const infoPath = `${dir}/.info.json`
   const octokit = new Octokit({ auth: githubtoken })
 
   // check if update is needed
