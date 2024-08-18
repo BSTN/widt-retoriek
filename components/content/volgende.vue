@@ -1,15 +1,20 @@
 <template>
-  <nuxtLink :to="props.link" class="volgende">
+  <nuxtLink :to="props.link" @click="save" class="volgende">
     <span v-if="!slotExists">Volgende</span>
     <slot v-else></slot>
   </nuxtLink>
 </template>
 <script lang="ts" setup>
-const props = defineProps(['link'])
+const props = defineProps(['link', 'opslaan'])
 const slots = useSlots()
 const slotExists = computed(() => {
   return Object.keys(slots).length > 0
 })
+function save() {
+  if (props.opslaan) {
+    alert('save!')
+  }
+}
 </script>
 <style lang="less" scoped>
 .volgende {

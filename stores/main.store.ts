@@ -7,18 +7,39 @@ export const useMainStore = defineStore({
   state: () => ({ 
     userid: '',
     answers: {
-      _version: info.hash
+      _github_content: info.hash,
+      _github_app: '',
+      _random: -1
     }
   }),
   actions: {
-    init() {
-      this.answers._version = info.hash
+    async init() {
+      this.answers._github_content = info.hash
+      this.setGithubSha()
+      if (this.answers._random === -1) {
+        await this.setRandomVersion()
+      }
     },
-    reset() {
+    async reset() {
       this.userid = nanoid()
       this.answers = {
-        _version: info.hash
+        _github_content: info.hash,
+        _github_app: '',
+        _random: -1
       }
+      this.setGithubSha()
+      await this.setRandomVersion()
+    },
+    setGithubSha() {
+      const runtimeConfig = useRuntimeConfig()
+      const VERCEL_GIT_COMMIT_SHA = runtimeConfig.public.VERCEL_GIT_COMMIT_SHA
+      this.answers._github_app = VERCEL_GIT_COMMIT_SHA
+    },
+    async setRandomVersion() {
+      const runtimeConfig = useRuntimeConfig()
+      const API = runtimeConfig.public.API
+      const { random } = await fetch(API + '/random').then(x => x.json())
+      this.answers._random = Math.round((Math.random() * 8))
     },
     save(reference: string, value: any) {
       this.answers[reference] = value
@@ -29,8 +50,8 @@ export const useMainStore = defineStore({
       else { this.answers[reference].push(value) }
     },
     async finish() {
-       const runtimeConfig = useRuntimeConfig()
-        const API = runtimeConfig.public.API
+      const runtimeConfig = useRuntimeConfig()
+      const API = runtimeConfig.public.API
 
         await fetch(API + '/save', {
           method: 'POST',

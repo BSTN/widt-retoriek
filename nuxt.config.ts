@@ -22,7 +22,8 @@ export default defineNuxtConfig({
 
   runtimeConfig: {
    public: {
-     API: process.env.API,
+      API: process.env.API,
+      VERCEL_GIT_COMMIT_SHA: process.env.VERCEL_GIT_COMMIT_SHA
    }
   },
 
