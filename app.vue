@@ -1,5 +1,6 @@
 <template>
   <div class="app">
+    <mainmenu></mainmenu>
     <ContentDoc class="the-content">
       <template #not-found>
         (page not found)

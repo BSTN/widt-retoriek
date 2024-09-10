@@ -10,7 +10,8 @@ export const useMainStore = defineStore({
       _github_content: info.hash,
       _github_app: '',
       _random: -1
-    }
+    },
+    names: []
   }),
   actions: {
     async init() {
@@ -19,6 +20,7 @@ export const useMainStore = defineStore({
       if (this.answers._random === -1) {
         await this.setRandomVersion()
       }
+      this.setRandomNames()
     },
     async reset() {
       this.userid = nanoid()
@@ -39,7 +41,13 @@ export const useMainStore = defineStore({
       const runtimeConfig = useRuntimeConfig()
       const API = runtimeConfig.public.API
       const { random } = await fetch(API + '/random').then(x => x.json())
-      this.answers._random = Math.round((Math.random() * 8))
+      console.log(random)
+      this.answers._random = random
+    },
+    async setRandomNames() {
+      for (let i = 0; i < 40; i++) {
+        this.names.push(nanoid())
+      }
     },
     save(reference: string, value: any) {
       this.answers[reference] = value
@@ -49,20 +57,22 @@ export const useMainStore = defineStore({
       if (this.answers[reference].indexOf(value) > -1) { this.answers[reference].splice(this.answers[reference].indexOf(value), 1)}
       else { this.answers[reference].push(value) }
     },
-    async finish() {
+    async sendData() {
       const runtimeConfig = useRuntimeConfig()
       const API = runtimeConfig.public.API
-
-        await fetch(API + '/save', {
-          method: 'POST',
-          headers: {
-            'Accept': 'application/json',
-            'Content-Type': 'application/json',
-          },
-          body: JSON.stringify({ userid: this.userid, answers: this.answers })
-        })
-
-        this.reset()
+  
+      await fetch(API + '/save', {
+        method: 'POST',
+        headers: {
+          'Accept': 'application/json',
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({ userid: this.userid, answers: this.answers })
+      })
+    },
+    async finish() {
+      await this.sendData()
+      this.reset()
     }
   },
   persist: {

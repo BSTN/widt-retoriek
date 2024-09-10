@@ -1,9 +1,10 @@
 <template>
   <div class="artikel-pagina">
+    Random versie: {{ store.answers._random }}
     <ContentDoc :path="artikelPath" class="article" />
-    <button class="show" v-if="showButton && !showComments" @click="showComments = true">Klik hier om de reacties te
-      modereren</button>
-    <div class="reacties" v-if="showComments">
+    <!-- <button class="show" v-if="showButton && !showComments" @click="showComments = true">Klik hier om de reacties te
+      modereren</button> -->
+    <div class="reacties">
       <label>Vanwege privacy redenen zijn de gebruikersnamen in de discussie geanonimiseerd</label>
       <div class="reactie commentbox" v-for="(comment, k) in commentsComputed">
         <div class="buttons">
@@ -14,14 +15,20 @@
             <Icon icon="gridicons:pin"></Icon>
           </button>
         </div>
-        <div class="name">{{ Math.random() * 10000000 }}</div>
+        <div class="name">{{ store.names[k] }}</div>
         <div class="text">
           {{ comment.comment }}
         </div>
       </div>
-      <div class="volgende-frame">
-        <NuxtLink :to="props.volgende" class="volgende">Ga verder</NuxtLink>
-      </div>
+    </div>
+    <div class="volgende-frame" v-if="!selectionsDone">
+      <button @click="selectionsDone = true" class="volgende">Volgende</button>
+    </div>
+    <div class="volgende-frame" v-if="selectionsDone">
+      <slot></slot>
+    </div>
+    <div class="volgende-frame" v-if="selectionsDone">
+      <NuxtLink :to="props.volgende" class="volgende">Ga verder</NuxtLink>
     </div>
   </div>
 </template>
@@ -44,6 +51,7 @@ const commentsComputed = computed(() => {
 
 const showButton = ref(false)
 const showComments = ref(false)
+const selectionsDone = ref(false)
 onMounted(() => {
   setTimeout(() => {
     showButton.value = true
@@ -52,11 +60,19 @@ onMounted(() => {
 
 function addToTrash(key: number) {
   const reference = `comments-${props.nummer}-deleted`
-  store.saveToggle(reference, key)
+  if (!(reference in store.answers) || store.answers[reference].length < 2 || store.answers[reference].includes(key)) {
+    store.saveToggle(reference, key)
+  } else {
+    alert('Je kan maximaal 2 berichten verwijderen.')
+  }
 }
 function addToPinnedItems(key: number) {
   const reference = `comments-${props.nummer}-pinned`
-  store.saveToggle(reference, key)
+  if (!(reference in store.answers) || store.answers[reference].length < 2 || store.answers[reference].includes(key)) {
+    store.saveToggle(reference, key)
+  } else {
+    alert('Je kan maximaal 2 berichten vastpinnen.')
+  }
 }
 
 function isDeleted(key: number) {
@@ -94,11 +110,14 @@ function isPinned(key: number) {
   }
 
   .buttons {
+    // position: absolute;
+    position: relative;
+    top: 0;
+    right: 0;
     text-align: right;
     float: right;
-    margin: 0;
+    margin: -0.5rem -1rem;
     z-index: 2;
-    position: relative;
 
     button {
       font-size: 1.5rem;

@@ -1,16 +1,18 @@
 <template>
   <div class="multiplechoice subquestion">
-    <div class="q">
-      <slot></slot>
-    </div>
-    <div class="options">
-      <div class="option" v-for="option in options" @click="store.save(props.reference, option)"
-        :class="{ active: option === store.answers[props.reference] }">
-        <Icon icon="akar-icons:check-box-fill" v-if="option === store.answers[props.reference]"></Icon>
-        <Icon icon="akar-icons:box" v-else></Icon>
-        {{ option }}
+    <ClientOnly>
+      <div class="q">
+        <slot></slot>
       </div>
-    </div>
+      <div class="options">
+        <div class="option" v-for="option in options" @click="store.save(props.reference, option)"
+          :class="{ active: option === store.answers[props.reference] }">
+          <Icon icon="akar-icons:check-box-fill" v-if="option === store.answers[props.reference]"></Icon>
+          <Icon icon="akar-icons:box" v-else></Icon>
+          {{ option }}
+        </div>
+      </div>
+    </ClientOnly>
   </div>
 </template>
 

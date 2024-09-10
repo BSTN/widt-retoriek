@@ -1,6 +1,8 @@
 <template>
   <div class="opmerkingen">
-    <slot></slot>
+    <div class="slot">
+      <slot></slot>
+    </div>
     <textarea v-model="store.answers[props.reference]"></textarea>
   </div>
 </template>
@@ -12,6 +14,10 @@ const props = defineProps(['reference'])
 
 <style lang="less" scoped>
 .opmerkingen {
+  .slot {
+    font-size: 0.75rem;
+  }
+
   textarea {
     width: 40rem;
     max-width: 100%;

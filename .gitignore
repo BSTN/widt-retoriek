@@ -1,6 +1,8 @@
 # local repositories
 repos/BSTN-widt-retoriek-content/
 
+todo
+
 # Nuxt dev/build outputs
 .output
 .data
