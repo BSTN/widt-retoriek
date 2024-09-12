@@ -1,19 +1,10 @@
-http://localhost:3003/
-- startpagina opmaken
 
-http://localhost:3003/vragen-vooraf
-- multiplechoice verplicht maken
+- scroll naar boven bij laden volgende pagina.
 
-  http://localhost:3003/artikel-1
+/artikel-1
 - randomiseren artikelen/reacties
-✔ random blurnamen genereren @done(24-09-10 17:26)
-- maximaal aantal delete/vastpinnen.
-- delete/vastpinnen blokkeren na klikken "ga verder"
-- <slot> toevoegen aan artikel
 - percentage slider component aanmaken
-- zelf reageren toevoegen aan artikel
+- artikelen shuffelen -> volgorde opslaan
 
-http://localhost:3003/laatste-vragen
-- likert helderder
-- verplicht maken
-- antwoord weergeven bij selecteren
+/laatste-vragen
+- extra optie likert -> ik wil de vraag niet beantwoorden

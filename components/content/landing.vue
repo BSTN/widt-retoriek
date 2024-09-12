@@ -15,11 +15,25 @@ const props = defineProps(['link'])
   text-align: center;
 }
 
+.logoin() {
+  transform: scale(0.8) rotateY(0deg);
+  opacity: 0;
+  animation: commentin 2s @easeInOutExpo .5s 1 forwards;
+
+  @keyframes commentin {
+    100% {
+      transform: scale(1) rotateY(360deg);
+      opacity: 1;
+    }
+  }
+}
+
 .the-logo {
   width: 60vh;
   height: 60vh;
   display: block;
   margin: 0rem auto 1rem;
+  .logoin();
 
   :deep(svg) {
     width: 100% !important;
@@ -46,7 +60,6 @@ a {
     :deep(svg) {
       width: 1rem !important;
       height: 1rem !important;
-
       transform: translate(0.5rem, 0.15rem);
 
       path {

@@ -14,6 +14,8 @@ const props = defineProps(['reference'])
 
 <style lang="less" scoped>
 .opmerkingen {
+  margin: 3rem 0 0rem;
+
   .slot {
     font-size: 0.75rem;
   }

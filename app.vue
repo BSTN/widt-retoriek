@@ -12,7 +12,10 @@
 import info from '@/repos/BSTN-widt-retoriek-content/.info.json'
 console.log(info)
 const store = useMainStore()
-
+const route = useRoute()
+watch(route, () => {
+  window.scrollTo(0, 0);
+})
 onMounted(async () => {
   await store.init()
 })
