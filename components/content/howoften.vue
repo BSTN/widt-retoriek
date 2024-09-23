@@ -1,7 +1,7 @@
 <template>
   <div class="howoften subquestion">
     <div class="q">
-      <slot></slot>
+      {{ props.q }}
     </div>
     <div class="options">
       <div class="option" v-for="option in options" @click="store.save(props.reference, option)">
@@ -15,7 +15,7 @@
 
 <script lang="ts" setup>
 import { Icon } from '@iconify/vue'
-const props = defineProps(['reference'])
+const props = defineProps(['reference', 'q'])
 const store = useMainStore()
 
 const options = [

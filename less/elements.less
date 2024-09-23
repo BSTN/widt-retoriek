@@ -364,7 +364,6 @@ div[class^="group-chapter"] {
   width: 40rem;
   max-width: 100%;
   --bc: #ccc;
-  border-top: 1px solid var(--bc);
   text-align: left;
   margin: 0 auto 1rem;
   padding: .5rem 0;
@@ -372,6 +371,15 @@ div[class^="group-chapter"] {
     flex: 1;
     font-weight: 500;
     margin-bottom: 1rem;
+    background: var(--fg);
+    color: var(--bg);
+    padding: 0.5rem 0.75rem;
+    border-radius: 0.25rem;
+    line-height: 1.2;
+    p {
+      display: inline;
+      margin:0;
+    }
   }
   
   .options {}

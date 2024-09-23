@@ -2,7 +2,7 @@
   <div class="multiplechoice subquestion">
     <ClientOnly>
       <div class="q">
-        <slot></slot>
+        {{ props.q }}
       </div>
       <div class="options">
         <div class="option" v-for="option in options" @click="store.save(props.reference, option)"
@@ -18,7 +18,7 @@
 
 <script lang="ts" setup>
 import { Icon } from '@iconify/vue'
-const props = defineProps(['options', 'reference'])
+const props = defineProps(['options', 'reference', 'q'])
 const store = useMainStore()
 const options = computed(() => {
   return eval(props.options)

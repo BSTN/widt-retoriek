@@ -3,11 +3,13 @@
     <div v-html="logo" class="the-logo"></div>
 
     <nuxtLink :to="props.link">klik hier om deel te nemen aan het experiment <span v-html="next"></span></nuxtLink>
+
   </div>
 </template>
 <script lang="ts" setup>
 import logo from '@/assets/logo/logo-diamond.svg?raw'
 import next from '@/assets/icons/next.svg?raw'
+const store = useMainStore()
 const props = defineProps(['link'])
 </script>
 <style lang="less" scoped>
