@@ -13,7 +13,8 @@
             {{ comment.comment }}
           </div>
         </div>
-        <customslider :comment="comment" :reference="comment.reference" v-if="!selectionsDone"></customslider>
+        <customslider :comment="comment" :reference="comment.reference" v-if="!selectionsDone"
+          label1="Niet constructief" label2="constructief"></customslider>
       </div>
     </div>
     <!-- volgend -->
@@ -22,7 +23,7 @@
     </div>
     <div class="volgende-frame" v-if="selectionsDone">
       <p v-html="props.participatievraag"></p>
-      <customslider :reference="`participatieslider-${props.nummer}`"></customslider>
+      <customslider :reference="`participatieslider-${props.nummer}`" label1="0%" label2="100%"></customslider>
     </div>
     <div class="done volgende-frame" v-if="selectionsDone && !responseDone">
       <button @click="responseDone = true" class="volgende">Volgende</button>

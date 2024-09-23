@@ -18,7 +18,7 @@
 
 <script lang="ts" setup>
 import { Icon } from '@iconify/vue'
-const props = defineProps(['options', 'reference', 'q'])
+const props = defineProps(['options', 'reference', 'q', 'necessary'])
 const store = useMainStore()
 const options = computed(() => {
   return eval(props.options)

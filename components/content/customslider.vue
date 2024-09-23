@@ -1,5 +1,9 @@
 <template>
   <div class="customslider">
+    <div class="labels">
+      <label>{{ props.label1 }}</label>
+      <label>{{ props.label2 }}</label>
+    </div>
     <Slider class="theslider" v-model="val" :min="0" :max="1" :step="0.01" :tooltips="false" tooltipPosition="top"
       :lazy="false"></Slider>
   </div>
@@ -8,7 +12,7 @@
 <script lang="ts" setup>
 import Slider from "@vueform/slider";
 const store = useMainStore()
-const props = defineProps(['reference'])
+const props = defineProps(['reference', 'label1', 'label2'])
 const val = computed({
   get() {
     if (props.reference in store.answers) {
@@ -28,6 +32,22 @@ const val = computed({
   width: 40rem;
   max-width: 100%;
   margin: 1rem auto 2rem;
+}
+
+.labels {
+  display: flex;
+
+  margin-bottom: 0.5rem;
+
+  label {
+    margin: 0;
+    padding: 0;
+    text-align: left;
+  }
+
+  label:first-child {
+    flex: 1;
+  }
 }
 
 .theslider {
