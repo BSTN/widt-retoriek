@@ -2,7 +2,9 @@
   <div class="landing">
     <div v-html="logo" class="the-logo"></div>
 
-    <nuxtLink :to="props.link">klik hier om deel te nemen aan het experiment <span v-html="next"></span></nuxtLink>
+    <nuxtLink :to="props.link" @click="store.reset()" class="volgende">
+      <slot></slot> <span v-html="next"></span>
+    </nuxtLink>
 
   </div>
 </template>

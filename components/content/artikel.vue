@@ -18,6 +18,7 @@
       </div>
     </div>
     <!-- volgend -->
+    <div v-if="!allcommentsdone">Je kunt verder als alle reacties zijn beoordeeld.</div>
     <div class="volgende-frame" v-if="!selectionsDone && allcommentsdone">
       <button @click="selectionsDone = true" class="volgende">Volgende</button>
     </div>
@@ -26,12 +27,19 @@
       <customslider :reference="`participatieslider-${props.nummer}`" label1="0%" label2="100%"></customslider>
     </div>
     <div class="done volgende-frame"
+      v-if="selectionsDone && !responseDone && !(`participatieslider-${props.nummer}` in store.answers)">
+      Je kunt verder als je de vorige vraag hebt beantwoord.
+    </div>
+    <div class="done volgende-frame"
       v-if="selectionsDone && !responseDone && `participatieslider-${props.nummer}` in store.answers">
       <button @click="responseDone = true" class="volgende">Volgende</button>
     </div>
     <div class="volgende-frame" v-if="selectionsDone && responseDone">
       <p v-html="props.reactievraag"></p>
       <textarea class="added-comment" v-model="addedComment" placeholder="Schrijf hier je reactie..." />
+    </div>
+    <div class="volgende-frame" v-if="selectionsDone && responseDone && addedComment.length === 0">
+      Je kunt verder als je een reactie hebt gegeven.
     </div>
     <div class="volgende-frame" v-if="selectionsDone && responseDone && addedComment.length > 0">
       <NuxtLink :to="props.volgende" class="volgende" @click="store.sendData()">Ga verder</NuxtLink>
