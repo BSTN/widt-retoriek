@@ -67,12 +67,12 @@ export const useMainStore = defineStore({
       const chunks3 = chunk(reacties3shuffled, 4);
       const chunks4 = chunk(reacties4shuffled, 4);
       if (random == 1 || random == 2) {
-        this.answers._reacties1 = chunks1[0].map(x => x.reference).concat(chunks2[0].map(x => x.reference))
-        this.answers._reacties2 = chunks3[0].map(x => x.reference).concat(chunks4[0].map(x => x.reference))
+        this.answers._reacties1 = shuffle(chunks1[0].map(x => x.reference).concat(chunks2[0].map(x => x.reference)))
+        this.answers._reacties2 = shuffle(chunks3[0].map(x => x.reference).concat(chunks4[0].map(x => x.reference)))
       }
       if (random == 3 || random == 4) {
-        this.answers._reacties1 = chunks3[0].map(x => x.reference).concat(chunks4[0].map(x => x.reference))
-        this.answers._reacties2 = chunks1[0].map(x => x.reference).concat(chunks2[0].map(x => x.reference))
+        this.answers._reacties1 = shuffle(chunks3[0].map(x => x.reference).concat(chunks4[0].map(x => x.reference)))
+        this.answers._reacties2 = shuffle(chunks1[0].map(x => x.reference).concat(chunks2[0].map(x => x.reference)))
       }
       // console.log(this.answers._reacties1, this.answers._reacties2)
     },
