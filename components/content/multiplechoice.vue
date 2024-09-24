@@ -1,5 +1,5 @@
 <template>
-  <div class="multiplechoice subquestion">
+  <div class="multiplechoice subquestion" :reference="props.reference" :class="{ answered }">
     <ClientOnly>
       <div class="q">
         {{ props.q }}
@@ -22,6 +22,9 @@ const props = defineProps(['options', 'reference', 'q', 'necessary'])
 const store = useMainStore()
 const options = computed(() => {
   return eval(props.options)
+})
+const answered = computed(() => {
+  return props.reference in store.answers
 })
 </script>
 

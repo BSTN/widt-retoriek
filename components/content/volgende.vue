@@ -32,6 +32,14 @@ async function save() {
   }
   if (allow.value) {
     router.push(props.link)
+  } else {
+    alert('Nog niet alle vragen zijn ingevuld.')
+    for (let i in props.check) {
+      if (!(props.check[i] in store.answers)) {
+        document.querySelector(`[reference=${props.check[i]}]`)?.scrollIntoView({ behavior: 'smooth' })
+        break;
+      }
+    }
   }
 }
 </script>

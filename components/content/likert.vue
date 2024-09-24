@@ -1,5 +1,5 @@
 <template>
-  <div class="subquestion">
+  <div class="likert subquestion" :reference="props.reference" :class="{ answered: props.reference in store.answers }">
     <ClientOnly>
       <div class="q">
         <slot></slot>
@@ -76,6 +76,9 @@ onMounted(() => {
 .likertoptions {
   // display: flex;
   justify-content: stretch;
+  background: var(--bg1);
+  padding: 1rem;
+  border-radius: 0 0 0.5rem 0.5rem;
 
   .option {
     flex: 1;

@@ -1,10 +1,11 @@
 <template>
-  <div class="howoften subquestion">
+  <div class="howoften subquestion" :class="{ answered }">
     <div class="q">
       {{ props.q }}
     </div>
     <div class="options">
-      <div class="option" v-for="option in options" @click="store.save(props.reference, option)">
+      <div class="option" v-for="option in options" @click="store.save(props.reference, option)"
+        :class="{ active: option === store.answers[props.reference] }">
         <Icon icon="akar-icons:check-box-fill" v-if="option === store.answers[props.reference]"></Icon>
         <Icon icon="akar-icons:box" v-else=""></Icon>
         {{ option }}
@@ -17,6 +18,10 @@
 import { Icon } from '@iconify/vue'
 const props = defineProps(['reference', 'q'])
 const store = useMainStore()
+
+const answered = computed(() => {
+  return props.reference in store.answers
+})
 
 const options = [
   'nooit',

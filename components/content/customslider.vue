@@ -32,12 +32,17 @@ const val = computed({
   width: 40rem;
   max-width: 100%;
   margin: 1rem auto 2rem;
+
+  &.disabled {
+    pointer-events: none;
+  }
 }
 
 .labels {
   display: flex;
+  user-select: none;
 
-  margin-bottom: 0.5rem;
+  margin-bottom: 0.25rem;
 
   label {
     margin: 0;

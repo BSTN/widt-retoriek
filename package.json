@@ -22,7 +22,7 @@
     "lodash": "^4.17.21",
     "nanoid": "^5.0.7",
     "node-tar": "^1.0.0",
-    "nuxt": "^3.12.4",
+    "nuxt": "^3.13.2",
     "octokit": "^4.0.2",
     "unstorage": "^1.10.2",
     "vite-plugin-markdown": "^2.2.0",

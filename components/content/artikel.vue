@@ -13,26 +13,27 @@
             {{ comment.comment }}
           </div>
         </div>
-        <customslider :comment="comment" :reference="comment.reference" v-if="!selectionsDone"
+        <customslider :comment="comment" :reference="comment.reference" :class="{ disabled: selectionsDone }"
           label1="Niet constructief" label2="constructief"></customslider>
       </div>
     </div>
     <!-- volgend -->
-    <div class="volgende-frame" v-if="!selectionsDone">
+    <div class="volgende-frame" v-if="!selectionsDone && allcommentsdone">
       <button @click="selectionsDone = true" class="volgende">Volgende</button>
     </div>
     <div class="volgende-frame" v-if="selectionsDone">
       <p v-html="props.participatievraag"></p>
       <customslider :reference="`participatieslider-${props.nummer}`" label1="0%" label2="100%"></customslider>
     </div>
-    <div class="done volgende-frame" v-if="selectionsDone && !responseDone">
+    <div class="done volgende-frame"
+      v-if="selectionsDone && !responseDone && `participatieslider-${props.nummer}` in store.answers">
       <button @click="responseDone = true" class="volgende">Volgende</button>
     </div>
     <div class="volgende-frame" v-if="selectionsDone && responseDone">
       <p v-html="props.reactievraag"></p>
       <textarea class="added-comment" v-model="addedComment" placeholder="Schrijf hier je reactie..." />
     </div>
-    <div class="volgende-frame" v-if="selectionsDone && responseDone">
+    <div class="volgende-frame" v-if="selectionsDone && responseDone && addedComment.length > 0">
       <NuxtLink :to="props.volgende" class="volgende" @click="store.sendData()">Ga verder</NuxtLink>
     </div>
   </div>
@@ -45,6 +46,15 @@ import reacties3 from '@/repos/BSTN-widt-retoriek-content/data/sub2reacties1.yml
 import reacties4 from '@/repos/BSTN-widt-retoriek-content/data/sub2reacties2.yml'
 
 const reacties_combined = reacties1.concat(reacties2).concat(reacties3).concat(reacties4);
+
+const allcommentsdone = computed(() => {
+  for (let i in reacties.value) {
+    if (!(reacties.value[i].reference in store.answers)) {
+      return false
+    }
+  }
+  return true
+})
 
 const artikelPath = computed(() => {
   const r = store.answers._random
@@ -62,7 +72,6 @@ const selectionsDone = ref(false)
 const responseDone = ref(false)
 
 const reacties = computed(() => {
-  console.log(store.answers._reacties1)
   if (props.nummer == 1) {
     return reacties_combined.filter(x => store.answers._reacties1.includes(x.reference))
   } else {
@@ -94,6 +103,9 @@ onMounted(() => {
 <style lang="less" scoped>
 .artikel-pagina {
   margin-bottom: 4rem;
+  max-width: 100%;
+  width: 40rem;
+  margin: 0 auto 4rem;
 }
 
 .show {
@@ -125,6 +137,10 @@ textarea.added-comment {
   text-align: left;
   width: 40rem;
   max-width: 100%;
+
+  .reactie {
+    margin-bottom: 4rem;
+  }
 
   .commentbox {
     .name {
