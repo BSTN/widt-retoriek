@@ -62,25 +62,17 @@ export const useMainStore = defineStore({
       const reacties2shuffled = shuffle(reacties2)
       const reacties3shuffled = shuffle(reacties3)
       const reacties4shuffled = shuffle(reacties4)
-      const chunks1 = chunk(reacties1shuffled, 8);
-      const chunks2 = chunk(reacties2shuffled, 8);
-      const chunks3 = chunk(reacties3shuffled, 8);
-      const chunks4 = chunk(reacties4shuffled, 8);
-      if (random == 1) {
-        this.answers._reacties1 = chunks1[0].map(x => x.reference)
-        this.answers._reacties2 = chunks4[0].map(x => x.reference)
+      const chunks1 = chunk(reacties1shuffled, 4);
+      const chunks2 = chunk(reacties2shuffled, 4);
+      const chunks3 = chunk(reacties3shuffled, 4);
+      const chunks4 = chunk(reacties4shuffled, 4);
+      if (random == 1 || random == 2) {
+        this.answers._reacties1 = chunks1[0].map(x => x.reference).concat(chunks2[0].map(x => x.reference))
+        this.answers._reacties2 = chunks3[0].map(x => x.reference).concat(chunks4[0].map(x => x.reference))
       }
-      if (random == 2) {
-        this.answers._reacties1 = chunks2[0].map(x => x.reference)
-        this.answers._reacties2 = chunks3[0].map(x => x.reference)
-      }
-      if (random == 3) {
-        this.answers._reacties1 = chunks4[0].map(x => x.reference)
-        this.answers._reacties2 = chunks1[0].map(x => x.reference)
-      }
-      if (random == 4) {
-        this.answers._reacties1 = chunks3[0].map(x => x.reference)
-        this.answers._reacties2 = chunks2[0].map(x => x.reference)
+      if (random == 3 || random == 4) {
+        this.answers._reacties1 = chunks3[0].map(x => x.reference).concat(chunks4[0].map(x => x.reference))
+        this.answers._reacties2 = chunks1[0].map(x => x.reference).concat(chunks2[0].map(x => x.reference))
       }
       // console.log(this.answers._reacties1, this.answers._reacties2)
     },

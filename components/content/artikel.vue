@@ -66,10 +66,35 @@ const allcommentsdone = computed(() => {
 
 const artikelPath = computed(() => {
   const r = store.answers._random
-  if ((props.nummer == 1 && (r == 1 || r == 2)) || (props.nummer == 2 && (r == 3 || r == 4))) {
-    return `/data/subject1`
-  } else {
-    return `/data/subject2`
+  // artikel 1
+  if (props.nummer == 1) {
+    if (r == 1) {
+      return `/data/subject1v1`
+    }
+    if (r == 2) {
+      return `/data/subject1v2`
+    }
+    if (r == 3) {
+      return `/data/subject2v1`
+    }
+    if (r == 4) {
+      return `/data/subject2v2`
+    }
+  }
+  // artikel 2
+  if (props.nummer == 2) {
+    if (r == 1) {
+      return `/data/subject2v1`
+    }
+    if (r == 2) {
+      return `/data/subject2v2`
+    }
+    if (r == 3) {
+      return `/data/subject1v1`
+    }
+    if (r == 4) {
+      return `/data/subject1v2`
+    }
   }
 })
 const props = defineProps(['nummer', 'volgende', 'participatievraag', 'reactievraag'])
