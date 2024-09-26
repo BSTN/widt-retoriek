@@ -4,7 +4,7 @@
       <ContentDoc :path="artikelPath" class="article" />
     </ClientOnly>
     <!-- reacties -->
-    <div v-if="!showComments" class="na-het-lezen">Na het lezen van het artikel verschijnen hier de reacties.</div>
+    <div v-if="!showComments" class="na-het-lezen">Na 30 seconden verschijnen hier de reacties</div>
     <div class="reacties-wrapper" v-if="showComments">
       <div class="reacties">
         <label>Vanwege privacy redenen zijn de gebruikersnamen in de discussie geanonimiseerd</label>
@@ -16,7 +16,7 @@
             </div>
           </div>
           <customslider :comment="comment" :reference="comment.reference" :class="{ disabled: selectionsDone }"
-            label1="Niet constructief" label2="constructief"></customslider>
+            :label1="props.label1 || 'Niet constructief'" :label2="props.label2 || 'constructief'"></customslider>
         </div>
       </div>
       <!-- volgend -->
@@ -103,7 +103,7 @@ const artikelPath = computed(() => {
     }
   }
 })
-const props = defineProps(['nummer', 'volgende', 'participatievraag', 'reactievraag'])
+const props = defineProps(['nummer', 'volgende', 'participatievraag', 'reactievraag', 'label1', 'label2'])
 const store = useMainStore()
 
 const selectionsDone = ref(false)
@@ -137,7 +137,7 @@ onKeyStroke('S', (ev) => {
 onMounted(() => {
   setTimeout(() => {
     showComments.value = true
-  }, 60000)
+  }, 30000)
 })
 
 </script>
