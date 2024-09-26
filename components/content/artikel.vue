@@ -4,21 +4,24 @@
       <ContentDoc :path="artikelPath" class="article" />
     </ClientOnly>
     <!-- reacties -->
-    <div class="reacties">
-      <label>Vanwege privacy redenen zijn de gebruikersnamen in de discussie geanonimiseerd</label>
-      <div class="reactie" v-for="(comment, k) in reacties">
-        <div class="commentbox">
-          <div class="name">{{ store.names[k] }}</div>
-          <div class="text">
-            {{ comment.comment }}
+    <div v-if="!showComments" class="na-het-lezen">Na het lezen van het artikel verschijnen hier de reacties.</div>
+    <div class="reacties-wrapper" v-if="showComments">
+      <div class="reacties">
+        <label>Vanwege privacy redenen zijn de gebruikersnamen in de discussie geanonimiseerd</label>
+        <div class="reactie" v-for="(comment, k) in reacties">
+          <div class="commentbox">
+            <div class="name">{{ store.names[k] }}</div>
+            <div class="text">
+              {{ comment.comment }}
+            </div>
           </div>
+          <customslider :comment="comment" :reference="comment.reference" :class="{ disabled: selectionsDone }"
+            label1="Niet constructief" label2="constructief"></customslider>
         </div>
-        <customslider :comment="comment" :reference="comment.reference" :class="{ disabled: selectionsDone }"
-          label1="Niet constructief" label2="constructief"></customslider>
       </div>
+      <!-- volgend -->
+      <div v-if="!allcommentsdone">Je kunt verder als alle reacties zijn beoordeeld.</div>
     </div>
-    <!-- volgend -->
-    <div v-if="!allcommentsdone">Je kunt verder als alle reacties zijn beoordeeld.</div>
     <div class="volgende-frame" v-if="!selectionsDone && allcommentsdone">
       <button @click="selectionsDone = true" class="volgende">Volgende</button>
     </div>
@@ -48,12 +51,15 @@
 </template>
 
 <script lang="ts" setup>
+import { onKeyStroke } from '@vueuse/core'
 import reacties1 from '@/repos/BSTN-widt-retoriek-content/data/sub1reacties1.yml'
 import reacties2 from '@/repos/BSTN-widt-retoriek-content/data/sub1reacties2.yml'
 import reacties3 from '@/repos/BSTN-widt-retoriek-content/data/sub2reacties1.yml'
 import reacties4 from '@/repos/BSTN-widt-retoriek-content/data/sub2reacties2.yml'
 
 const reacties_combined = reacties1.concat(reacties2).concat(reacties3).concat(reacties4);
+
+const showComments = ref(false)
 
 const allcommentsdone = computed(() => {
   for (let i in reacties.value) {
@@ -100,7 +106,6 @@ const artikelPath = computed(() => {
 const props = defineProps(['nummer', 'volgende', 'participatievraag', 'reactievraag'])
 const store = useMainStore()
 
-const showButton = ref(false)
 const selectionsDone = ref(false)
 const responseDone = ref(false)
 
@@ -125,10 +130,16 @@ const addedComment = computed({
   }
 })
 
+onKeyStroke('s', (ev) => {
+  if (ev.altKey) {
+    showComments.value = true
+  }
+})
+
 onMounted(() => {
   setTimeout(() => {
-    showButton.value = true
-  }, 3000)
+    showComments.value = true
+  }, 60000)
 })
 
 </script>
@@ -146,6 +157,9 @@ onMounted(() => {
   .button();
 }
 
+.na-het-lezen {
+  margin-top: 4rem;
+}
 
 
 .volgende-frame {
