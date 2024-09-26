@@ -130,10 +130,8 @@ const addedComment = computed({
   }
 })
 
-onKeyStroke('s', (ev) => {
-  if (ev.altKey) {
-    showComments.value = true
-  }
+onKeyStroke('S', (ev) => {
+  showComments.value = true
 })
 
 onMounted(() => {
