@@ -52,10 +52,10 @@
 
 <script lang="ts" setup>
 import { onKeyStroke } from '@vueuse/core'
-import reacties1 from '@/repos/BSTN-widt-retoriek-content/data/sub1reacties1.yml'
-import reacties2 from '@/repos/BSTN-widt-retoriek-content/data/sub1reacties2.yml'
-import reacties3 from '@/repos/BSTN-widt-retoriek-content/data/sub2reacties1.yml'
-import reacties4 from '@/repos/BSTN-widt-retoriek-content/data/sub2reacties2.yml'
+import reacties1 from '@/repos/BSTN-widt-retoriek-content/data/sub1reacties1-Migratie-Basis.yml'
+import reacties2 from '@/repos/BSTN-widt-retoriek-content/data/sub1reacties2-Migratie-Subjectief.yml'
+import reacties3 from '@/repos/BSTN-widt-retoriek-content/data/sub2reacties1-Klimaat-Basis.yml'
+import reacties4 from '@/repos/BSTN-widt-retoriek-content/data/sub2reacties2-Klimaat-Subjectief.yml'
 
 const reacties_combined = reacties1.concat(reacties2).concat(reacties3).concat(reacties4);
 
