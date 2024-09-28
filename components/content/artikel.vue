@@ -90,16 +90,16 @@ const artikelPath = computed(() => {
   // artikel 2
   if (props.nummer == 2) {
     if (r == 1) {
-      return `/data/subject2v1-klimaat-onrecht`
-    }
-    if (r == 2) {
       return `/data/subject2v2-klimaat-solidariteit`
     }
+    if (r == 2) {
+      return `/data/subject2v1-klimaat-onrecht`
+    }
     if (r == 3) {
-      return `/data/subject1v1-migratie-onrecht`
+      return `/data/subject1v2-migratie-solidariteit`
     }
     if (r == 4) {
-      return `/data/subject1v2-migratie-solidariteit`
+      return `/data/subject1v1-migratie-onrecht`
     }
   }
 })
