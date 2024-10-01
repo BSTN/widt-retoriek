@@ -11,6 +11,9 @@
           <Icon icon="akar-icons:box" v-else></Icon>
           {{ option }}
         </div>
+        <div class="openfield" v-if="answered && store.answers[props.reference] === 'Anders, namelijk...'">
+          <input type="text" placeholder="..." v-model="openAnswer" @keydown.enter="$event.target.blur()">
+        </div>
       </div>
     </ClientOnly>
   </div>
@@ -26,6 +29,23 @@ const options = computed(() => {
 const answered = computed(() => {
   return props.reference in store.answers
 })
+const openreference = computed(() => {
+  return props.reference + '_open'
+})
+const openAnswer = computed({
+  get() {
+    if (!(openreference.value in store.answers)) { return '' }
+    return store.answers[openreference.value]
+  }, set(val) {
+    store.save(openreference.value, val)
+  }
+})
 </script>
 
-<style lang="less" scoped></style>
+<style lang="less" scoped>
+.openfield {
+  input {
+    border: 1px solid var(--bg);
+  }
+}
+</style>
