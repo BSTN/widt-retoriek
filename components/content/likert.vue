@@ -20,16 +20,13 @@
 import { Icon } from '@iconify/vue'
 const store = useMainStore()
 const props = defineProps(['reference'])
-const options = [1, 2, 3, 4, 5, 6, 7, 8]
+const options = [1, 2, 3, 4, 5]
 const values = [
-  'Helemaal mee oneens',
   'Mee oneens',
   'Beetje mee oneens',
   'Geen mening',
   'Beetje mee eens',
   'Mee eens',
-  'Helemaal mee eens',
-  'Ik wil deze vraag liever niet beantwoorden'
 ]
 const r = ref(0.1)
 
