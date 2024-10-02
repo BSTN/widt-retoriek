@@ -17,7 +17,6 @@ export const useMainStore = defineStore({
       _github_content: info.hash,
       _github_app: '',
       _random: -1,
-      _started: false,
       _reacties1: [],
       _reacties2: []
     },
@@ -39,8 +38,7 @@ export const useMainStore = defineStore({
         _github_app: '',
         _random: -1,
         _reacties1: [],
-        _reacties2: [],
-        _started: false
+        _reacties2: []
       }
       this.setGithubSha()
       await this.setRandomVersion()
