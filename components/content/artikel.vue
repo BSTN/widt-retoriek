@@ -111,9 +111,9 @@ const responseDone = ref(false)
 
 const reacties = computed(() => {
   if (props.nummer == 1) {
-    return reacties_combined.filter(x => store.answers._reacties1.includes(x.reference))
+    return store.answers._reacties1.map(x => reacties_combined.find(xx => xx.reference === x))
   } else {
-    return reacties_combined.filter(x => store.answers._reacties2.includes(x.reference))
+    return store.answers._reacties2.map(x => reacties_combined.find(xx => xx.reference === x))
   }
 })
 
