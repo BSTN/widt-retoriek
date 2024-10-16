@@ -85,8 +85,8 @@ export const useMainStore = defineStore({
         this.answers._reacties2 = shuffle(chunks3[0].map(x => x.reference).concat(chunks4.map(x => x.reference)))
       }
       if (random == 3 || random == 4) {
-        this.answers._reacties1 = shuffle(chunks3[0].map(x => x.reference).concat(chunks4[0].map(x => x.reference)))
-        this.answers._reacties2 = shuffle(chunks1[0].map(x => x.reference).concat(chunks2[0].map(x => x.reference)))
+        this.answers._reacties1 = shuffle(chunks3[0].map(x => x.reference).concat(chunks4.map(x => x.reference)))
+        this.answers._reacties2 = shuffle(chunks1[0].map(x => x.reference).concat(chunks2.map(x => x.reference)))
       }
       // console.log(this.answers._reacties1, this.answers._reacties2)
     },
