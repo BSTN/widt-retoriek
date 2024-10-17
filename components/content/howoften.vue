@@ -30,7 +30,7 @@ const options = [
   'eens per maand',
   'een paar keer per maand',
   'eens per week',
-  'een paar per keer week,',
+  'een paar keer per week',
   'dagelijks'
 ]
 
