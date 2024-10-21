@@ -8,6 +8,13 @@ const localRepository = resolve(__dirname, '../widt-retoriek-content')
 
 export default defineNuxtConfig({
   compatibilityDate: '2024-04-03',
+  app: {
+    head: {
+      htmlAttrs: {
+        lang: 'nl'
+      }
+    },
+  },
   content: {
     sources: {
       content: {
